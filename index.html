@@ -3,286 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gradient Concept with Animation</title>
-    <!-- Removed Polyfill as it's likely unnecessary -->
-    <!-- <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script> -->
-    <!-- MathJax for rendering mathematical notation -->
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <!-- Plotly library for plotting (specific version) -->
-    <script src="https://cdn.plot.ly/plotly-2.18.0.min.js"></script>
+    <title>Understanding the Gradient</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
     <style>
         /* Basic styling for a clean layout */
         body {
             font-family: Arial, sans-serif;
             background-color: #fff;
             color: #333;
-            font-size: 150%; /* 150% font size */
+            font-size: 150%; /* Increased font size to 150% */
             margin: 0;
             padding: 20px;
         }
         .lesson-container {
-            max-width: 800px; /* Increased width for better visualization */
+            max-width: 600px;
             margin: auto;
             padding: 20px;
-            background-color: #fff;
+            background-color: #fff; /* Set container background to white */
             border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Added subtle shadow for depth */
         }
-        h2 {
-            color: #1a73e8;
-        }
-        .image {
+        .image-placeholder {
             width: 100%;
             height: auto;
             border-radius: 4px;
             margin-bottom: 20px;
         }
-        /* Styling for the plot div */
-        #plot {
-            width: 100%;
-            height: 500px; /* Ensures adequate height for the plot */
-            margin-bottom: 20px;
-        }
         .continue-button {
-            padding: 10px 20px;
+            padding: 10px;
+            margin-top: 15px;
             border: none;
             color: #fff;
-            background-color: #1a73e8; /* Changed to match theme color */
+            background-color: #000;
+            border-radius: 8px;
             font-weight: bold;
-            border-radius: 4px;
             cursor: pointer;
-            margin-top: 20px;
-            display: inline-block;
             text-align: center;
-            transition: background-color 0.3s ease; /* Added hover effect */
+            display: inline-block;
         }
-        .continue-button:hover {
-            background-color: #1558b0;
-        }
-        /* Spacing between sections */
-        section {
-            margin-bottom: 40px;
-        }
-        /* Initially hide sections other than the first one */
-        .hidden {
+        .hidden-section {
             display: none;
+            margin-top: 30px; /* Adds space between sections */
         }
     </style>
 </head>
 <body>
 
     <div class="lesson-container">
-        <section class="intro-section">
+        <section>
             <p>First, let's understand the concept of a gradient.</p>
             <p>In simple terms, it's like a compass pointing in the direction of the steepest ascent of a function.</p>
-            <!-- Ensure the image path is correct or remove it temporarily -->
-            <!-- <img src="images/gradient_descent_example.jpg" alt="Gradient descent example" class="image"> -->
-
-            <!-- Continue Button -->
-            <button class="continue-button" onclick="showNextSection('math-section', this)">Continue</button>
+            <img src="images/gradient_descent_example.jpg" alt="Gradient Descent Example" class="image-placeholder">
+            <div class="continue-button" onclick="showNextSection('math-section')">Continue</div>
         </section>
 
-        <section id="math-section" class="hidden">
-            <p>Mathematically, for a function \( f(x) \) in one dimension, the gradient is the derivative \( f'(x) \).</p>
-            <!-- Plotly Visual Aid with Animation -->
-            <div id="plot"></div>
-
-            <!-- Continue Button -->
-            <button class="continue-button" onclick="showNextSection('multi-dimension-section', this)">Continue</button>
+        <section id="math-section" class="hidden-section">
+            <p>Mathematically, for a function \( f(x) \) in one dimension, the gradient is the derivative \( f′(x) \).</p>
+            <img src="images/gradient_descent_example.jpg" alt="Gradient Descent Example" class="image-placeholder">
+            <div class="continue-button" onclick="showNextSection('multi-dimension-section')">Continue</div>
         </section>
 
-        <section id="multi-dimension-section" class="hidden">
+        <section id="multi-dimension-section" class="hidden-section">
             <p>In multiple dimensions, the gradient is a vector of partial derivatives:</p>
-            <p>\[\nabla f(x) = \left( \frac{\partial f}{\partial x_1}, \frac{\partial f}{\partial x_2}, \dots, \frac{\partial f}{\partial x_n} \right)\]</p>
+            <p>
+                \[
+                \nabla f(x) = \left( \frac{\partial f}{\partial x_1}, \frac{\partial f}{\partial x_2}, \dots, \frac{\partial f}{\partial x_n} \right)
+                \]
+            </p>
             <p>This vector points in the direction where the function increases the most.</p>
-            <div id="multi-dim-plot" style="width: 100%; height: 500px; background-color: #ddd; border-radius: 4px; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; color: #555; font-size: 18px;">
-                3D Visualization Placeholder
-            </div>
+            <img src="images/gradient_descent_example.jpg" alt="Gradient Descent Example" class="image-placeholder">
         </section>
     </div>
 
-    <!-- Custom Script -->
     <script>
-        // Function to show the next section and initialize its content
-        function showNextSection(sectionId, button) {
-            console.log(`Showing section: ${sectionId}`);
-            document.getElementById(sectionId).classList.remove("hidden");
-            button.style.display = "none";
-            MathJax.typeset();
-
-            if (sectionId === 'math-section') {
-                // Delay the plot rendering by 100 milliseconds to ensure the section is visible
-                setTimeout(() => {
-                    console.log("Calling plotGradientDescent after section is visible.");
-                    plotGradientDescent();
-                }, 100);
-            }
-
-            // If you implement the multi-dimension plot, initialize it here
-            if (sectionId === 'multi-dimension-section') {
-                // Initialize multi-dimension plot if implemented
+        function showNextSection(sectionId) {
+            // Hide the clicked button
+            event.target.style.display = 'none';
+            
+            // Show the next section
+            const nextSection = document.getElementById(sectionId);
+            if (nextSection) {
+                nextSection.style.display = 'block';
+                // Smooth scroll to the revealed section
+                nextSection.scrollIntoView({ behavior: 'smooth' });
             }
         }
-
-        // Gradient function
-        function gradient(x) {
-            return 2 * x; // Derivative of f(x) = x^2
-        }
-
-        // Function to perform gradient descent and animate the results
-        function plotGradientDescent() {
-            console.log("plotGradientDescent function called.");
-
-            let xValues = [];
-            let yValues = [];
-            let pathX = [];
-            let pathY = [];
-
-            // Generate x values for the function f(x) = x^2
-            for (let i = -10; i <= 10; i += 0.1) {
-                xValues.push(i);
-                yValues.push(i * i);  // f(x) = x^2
-            }
-
-            // Gradient Descent parameters
-            let x = 4;  // Starting point x = 4
-            const learningRate = 0.1;
-            const tolerance = 0.0001;
-            const maxIterations = 20;
-            let iteration = 0;
-
-            // Arrays to store gradient descent steps
-            let iterations = [];
-            let descentPath = [];
-
-            // Perform gradient descent steps and store each iteration's state
-            while (iteration < maxIterations) {
-                const grad = gradient(x);
-                const xNew = x - learningRate * grad;
-                const yNew = xNew * xNew;
-                pathX.push(xNew);
-                pathY.push(yNew);
-                console.log(`Iteration ${iteration + 1}: x = ${xNew}, f(x) = ${yNew}`);
-                iterations.push({ x: [...pathX], y: [...pathY] });
-                descentPath.push({ x: xNew, y: yNew });
-                if (Math.abs(xNew - x) < tolerance) break;
-                x = xNew;
-                iteration++;
-            }
-
-            // Initial plot (first frame)
-            const initialData = {
-                x: xValues,
-                y: yValues,
-                mode: 'lines',
-                line: { color: '#2980b9', width: 3 },
-                name: 'f(x) = x^2',
-                hoverinfo: 'none'
-            };
-
-            const initialPath = {
-                x: [pathX[0]],
-                y: [pathY[0]],
-                mode: 'markers+lines',
-                line: { color: '#e74c3c', width: 2 },
-                marker: { color: '#e74c3c', size: 8 },
-                name: 'Gradient Descent Path',
-                hoverinfo: 'none'
-            };
-
-            // Create frames for each iteration
-            let frames = iterations.map((step, index) => {
-                return {
-                    name: `frame${index}`,
-                    data: [
-                        // Update the gradient descent path up to the current iteration
-                        {
-                            x: step.x,
-                            y: step.y
-                        }
-                    ],
-                    traces: [1]  // Index of the descent path trace
-                };
-            });
-
-            const layout = {
-                autosize: true,
-                xaxis: { 
-                    title: 'x', 
-                    titlefont: { size: 18, color: '#34495e' }, 
-                    linewidth: 2, 
-                    fixedrange: true 
-                },
-                yaxis: { 
-                    title: 'f(x)', 
-                    titlefont: { size: 18, color: '#34495e' }, 
-                    linewidth: 2, 
-                    fixedrange: true 
-                },
-                plot_bgcolor: '#ecf0f1',
-                paper_bgcolor: '#f2f1ef',
-                showlegend: true,
-                legend: { 
-                    x: 0.05, 
-                    y: 0.95,
-                    bgcolor: 'rgba(0,0,0,0)'
-                },
-                margin: { l: 70, r: 70, b: 70, t: 50 },
-                height: 500,
-                hovermode: false,
-                updatemenus: [{
-                    type: 'buttons',
-                    buttons: [
-                        {
-                            label: 'Play',
-                            method: 'animate',
-                            args: [null, {
-                                fromcurrent: true,
-                                transition: { duration: 500, easing: 'linear' },
-                                frame: { duration: 500, redraw: false }
-                            }]
-                        },
-                        {
-                            label: 'Pause',
-                            method: 'animate',
-                            args: [[null], {
-                                mode: 'immediate',
-                                transition: { duration: 0 },
-                                frame: { duration: 0, redraw: false }
-                            }]
-                        }
-                    ],
-                    direction: 'left',
-                    pad: { r: 10, t: 87 },
-                    showactive: false,
-                    x: 0.1,
-                    y: 0,
-                    xanchor: 'right',
-                    yanchor: 'top'
-                }]
-            };
-
-            const config = { displayModeBar: false };
-
-            Plotly.newPlot('plot', [initialData, initialPath], layout, config)
-                .then(() => {
-                    console.log("Plotly plot successfully created.");
-
-                    // Add frames to the plot
-                    Plotly.addFrames('plot', frames);
-
-                    console.log("Frames added to Plotly plot.");
-                })
-                .catch((error) => {
-                    console.error("Error creating Plotly plot:", error);
-                });
-        }
-
-        // Initialize MathJax when the window loads
-        window.onload = function() {
-            console.log("Window loaded.");
-            MathJax.typeset();
-        };
     </script>
 
 </body>
