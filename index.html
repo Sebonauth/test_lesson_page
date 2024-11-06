@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gradient Concept</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        /* Basic styling for a clean layout */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fff;
+            color: #333;
+            font-size: 150%; /* 150% font size */
+            margin: 0;
+            padding: 20px;
+        }
+        .lesson-container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+        }
+        h2 {
+            color: #1a73e8;
+        }
+        .image {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+        .visual-aid-placeholder {
+            width: 100%;
+            height: 200px;
+            background-color: #ddd;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #555;
+            font-size: 18px;
+        }
+        .continue-button {
+            padding: 10px 20px;
+            border: none;
+            color: #fff;
+            background-color: #000;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+            display: inline-block;
+            text-align: center;
+        }
+        /* Spacing between sections */
+        section {
+            margin-bottom: 40px;
+        }
+        /* Initially hide sections other than the first one */
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="lesson-container">
+        <section class="intro-section">
+            <p>First, let's understand the concept of a gradient.</p>
+            <p>In simple terms, it's like a compass pointing in the direction of the steepest ascent of a function.</p>
+            <img src="images/gradient_descent_example.jpg" alt="Gradient descent example" class="image">
+
+            <!-- Continue Button -->
+            <button class="continue-button" onclick="showNextSection('math-section', this)">Continue</button>
+        </section>
+
+        <section id="math-section" class="hidden">
+            <p>Mathematically, for a function \( f(x) \) in one dimension, the gradient is the derivative \( f'(x) \).</p>
+            <div class="visual-aid-placeholder">Visual Aid placeholder</div>
+
+            <!-- Continue Button -->
+            <button class="continue-button" onclick="showNextSection('multi-dimension-section', this)">Continue</button>
+        </section>
+
+        <section id="multi-dimension-section" class="hidden">
+            <p>In multiple dimensions, the gradient is a vector of partial derivatives:</p>
+            <p>\[\nabla f(x) = \left( \frac{\partial f}{\partial x_1}, \frac{\partial f}{\partial x_2}, \dots, \frac{\partial f}{\partial x_n} \right)\]</p>
+            <p>This vector points in the direction where the function increases the most.</p>
+            <div class="visual-aid-placeholder">Visual Aid placeholder</div>
+        </section>
+    </div>
+
+    <script>
+        function showNextSection(sectionId, button) {
+            // Show the next section
+            document.getElementById(sectionId).classList.remove("hidden");
+
+            // Hide the current button after it's clicked
+            button.style.display = "none";
+
+            // Re-render MathJax to properly display any new equations
+            MathJax.typeset();
+        }
+    </script>
+
+</body>
+</html>
